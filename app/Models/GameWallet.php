@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class GameWallet extends Model
 {
     use HasFactory;
+
+    protected $table = 'game_wallets';
+
+    protected $guarded = [];
 }
