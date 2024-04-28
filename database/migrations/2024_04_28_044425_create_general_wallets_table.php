@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bets', function (Blueprint $table) {
+        Schema::create('general_wallets', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('users_id');
-            $table->double('round');
-            $table->double('win_round')->nullable();
-            $table->double('win_amount')->nullable();
-            $table->double('win_users')->nullable();
-            $table->double('tot_users')->nullable();
-            $table->time('time_per_round');
-            $table->date('date');
-            $table->date('status');
+            $table->double('amount');
+            $table->string('status', 45);
             $table->timestamps();
         });
     }
@@ -31,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bets');
+        Schema::dropIfExists('general_wallets');
     }
 };
