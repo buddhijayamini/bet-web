@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bet_users', function (Blueprint $table) {
+        Schema::create('bet_results', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('users_id');
-            $table->bigInteger('bets_id');
-            $table->string('color');
-            $table->double('amount');
-            $table->string('status', 45);
+            $table->string('win_color');
+            $table->double('win_round');
+            $table->double('win_amount');
+            $table->double('win_users');
+            $table->double('lost_users');
+            $table->double('tot_users');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bet_users');
+        Schema::dropIfExists('bet_results');
     }
 };

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bet;
 use App\Http\Controllers\Controller;
+use App\Models\BetUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,40 @@ class BetController extends Controller
 
             // Create a new bet record using create()
             $bet = Bet::create($validatedData);
+
+            // Commit the transaction if everything is successful
+            DB::commit();
+
+            return redirect()->route('home')->with(['message' => 'Bet created successfully', 'bet' => $bet]);
+        } catch (Throwable $th) {
+            // Rollback the transaction if an exception occurs
+            DB::rollBack();
+
+            // Log the error or handle it in any other way
+            return redirect()->back()->with(['error' => 'Failed to create bet', 'message' => $th->getMessage()]);
+        }
+    }
+
+    public function voteBet($id, Request $request)
+    {
+        try {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'action' => 'required|string',
+                'amount' => 'required|numeric',
+            ]);
+
+            // Start the database transaction
+            DB::beginTransaction();
+
+            $data['users_id'] = Auth::user()->id;
+            $data['bets_id'] = $id;
+            $data['status'] = 'Voted';
+            $data['color'] =  $validatedData['action'];
+            $data['amount'] =  $validatedData['amount'];
+
+            // Create a new bet record using create()
+            $bet = BetUser::create($data);
 
             // Commit the transaction if everything is successful
             DB::commit();
