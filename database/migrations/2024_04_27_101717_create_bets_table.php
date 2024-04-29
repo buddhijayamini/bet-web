@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('tot_users')->nullable();
             $table->time('time_per_round');
             $table->date('date');
-            $table->date('status');
+            $table->string('status', 45);
             $table->timestamps();
         });
     }

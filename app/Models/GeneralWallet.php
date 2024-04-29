@@ -12,4 +12,9 @@ class GeneralWallet extends Model
     protected $table = 'general_wallets';
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

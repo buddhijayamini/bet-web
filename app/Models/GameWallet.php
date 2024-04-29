@@ -12,4 +12,9 @@ class GameWallet extends Model
     protected $table = 'game_wallets';
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

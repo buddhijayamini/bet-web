@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BetController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,4 +10,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/create-bet', [BetController::class, 'index'])->name('create.bet');
+Route::post('/store-bet', [BetController::class, 'store'])->name('store.bet');
+
+

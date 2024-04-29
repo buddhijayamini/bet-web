@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'roles_id'
     ];
 
     /**
@@ -44,4 +45,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function wallet()
+    {
+        return $this->hasOne(GeneralWallet::class);
+    }
+
+    public function game_wallet()
+    {
+        return $this->hasOne(GameWallet::class);
+    }
+
+    public function bets()
+    {
+        return $this->hasMany(Bet::class);
+    }
+
 }
