@@ -20,7 +20,7 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                        <h3>Place A Bets</h3>
+                        <h3>Place A Bet</h3>
                         @if ($bet)
                             <ul>
                                 <li>{{ $bet->id }} - {{ $bet->date }} </br>

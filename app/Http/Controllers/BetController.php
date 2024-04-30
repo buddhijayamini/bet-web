@@ -19,15 +19,7 @@ class BetController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('create_bet');
     }
 
     /**
