@@ -48,12 +48,12 @@ class User extends Authenticatable
 
     public function wallet()
     {
-        return $this->hasOne(GeneralWallet::class);
+        return $this->hasOne(GeneralWallet::class, 'users_id', 'id');
     }
 
-    public function game_wallet()
+    public function gameWallet()
     {
-        return $this->hasOne(GameWallet::class);
+        return $this->hasOne(GameWallet::class, 'users_id', 'id');
     }
 
     public function bets()

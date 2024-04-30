@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bet;
 use App\Http\Controllers\Controller;
 use App\Models\BetUser;
+use App\Models\GameWallet;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -72,17 +74,40 @@ class BetController extends Controller
                 'amount' => 'required|numeric',
             ]);
 
+            $user = Auth::user();
+            $admin = User::find(1);
+            $amount =  $validatedData['amount'];
+
+            // Retrieve the user's game wallet
+            $userWallet = $user->gameWallet()->first();
+            $adminWallet = $admin->wallet()->first();
+
+            if($adminWallet->amount < $amount){
+                throw new \Exception('Insufficient balance in the admin wallet.');
+            }
+
             // Start the database transaction
             DB::beginTransaction();
 
-            $data['users_id'] = Auth::user()->id;
-            $data['bets_id'] = $id;
-            $data['status'] = 'Voted';
-            $data['color'] =  $validatedData['action'];
-            $data['amount'] =  $validatedData['amount'];
+            if ($userWallet && $amount < $userWallet->amount) {
+                $data['users_id'] = $user->id;
+                $data['bets_id'] = $id;
+                $data['status'] = 'Voted';
+                $data['color'] =  $validatedData['action'];
+                $data['amount'] = $amount;
 
-            // Create a new bet record using create()
-            $bet = BetUser::create($data);
+                // Create a new bet record using create()
+                $bet = BetUser::create($data);
+
+                GameWallet::create([
+                    'users_id' => $user->id,
+                    'amount' => - $amount,
+                    'status' => 'Betted'
+                ]);
+
+            } else {
+                return redirect()->route('home')->with(['error' => 'Failed to create bet', 'message' => 'Not enough amount in Wallet']);
+            }
 
             // Commit the transaction if everything is successful
             DB::commit();
