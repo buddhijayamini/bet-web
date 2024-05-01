@@ -98,7 +98,7 @@ class BetController extends Controller
                 ]);
 
             } else {
-                return redirect()->route('home')->with(['error' => 'Failed to create bet', 'message' => 'Not enough amount in Wallet']);
+                return redirect()->route('game.wallet')->with(['error' => 'Failed to create bet', 'message' => 'Not enough amount in Wallet']);
             }
 
             // Commit the transaction if everything is successful

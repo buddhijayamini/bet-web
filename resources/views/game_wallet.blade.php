@@ -8,8 +8,8 @@
                 <div class="card-header">Game Wallet</div>
 
                 <div class="card-body">
-                    <p>Your general wallet balance: $ {{ $generalWallet ?? 0 }}</p>
-                    <p>Your game wallet balance: $ {{ $gameWallet ?? 0 }}</p>
+                    <p>Your general wallet balance: $ {{ $generalWallet }}</p>
+                    <p>Your game wallet balance: $ {{ $gameWallet }}</p>
 
                     <div class="card-body">
                         @if (session('error'))

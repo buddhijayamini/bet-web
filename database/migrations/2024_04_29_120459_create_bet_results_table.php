@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bet_results', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('bets_id');
             $table->string('win_color');
             $table->double('win_round');
             $table->double('win_amount');

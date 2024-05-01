@@ -18,8 +18,8 @@ class GameWalletController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $generalWallet = $user->wallet->amount;
-        $gameWallet = $user->gameWallet()->sum('amount');
+        $generalWallet = $user->wallet->amount ?? 0;
+        $gameWallet = $user->gameWallet()->sum('amount') ?? 0;
 
         return view('game_wallet', compact('generalWallet', 'gameWallet'));
     }

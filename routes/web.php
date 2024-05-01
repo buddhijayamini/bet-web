@@ -13,19 +13,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/create-bet', [BetController::class, 'index'])->name('create.bet');
-Route::post('/store-bet', [BetController::class, 'store'])->name('store.bet');
-Route::post('/bet-vote/{id}', [BetController::class, 'voteBet'])->name('bet.vote');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/wallet', [GeneralWalletController::class, 'index'])->name('wallet');
-Route::post('/topup-wallet', [GeneralWalletController::class, 'store'])->name('topup.wallet');
+    Route::get('/create-bet', [BetController::class, 'index'])->name('create.bet');
+    Route::post('/store-bet', [BetController::class, 'store'])->name('store.bet');
+    Route::post('/bet-vote/{id}', [BetController::class, 'voteBet'])->name('bet.vote');
 
-Route::get('/game-wallet', [GameWalletController::class, 'index'])->name('game.wallet');
-Route::post('/topup-game', [GameWalletController::class, 'store'])->name('topup.game');
+    Route::get('/wallet', [GeneralWalletController::class, 'index'])->name('wallet');
+    Route::post('/topup-wallet', [GeneralWalletController::class, 'store'])->name('topup.wallet');
 
-
-
-
-
+    Route::get('/game-wallet', [GameWalletController::class, 'index'])->name('game.wallet');
+    Route::post('/topup-game', [GameWalletController::class, 'store'])->name('topup.game');
+});

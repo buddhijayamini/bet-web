@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('win_users', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('bets_id');
             $table->bigInteger('users_id');
             $table->double('amount');
             $table->timestamps();
