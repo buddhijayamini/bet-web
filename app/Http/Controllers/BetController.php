@@ -40,6 +40,7 @@ class BetController extends Controller
 
             $validatedData['users_id'] = Auth::user()->id;
             $validatedData['status'] = 'Created';
+            $validatedData['bet_id'] = 'Created';
 
             // Create a new bet record using create()
             $bet = Bet::create($validatedData);

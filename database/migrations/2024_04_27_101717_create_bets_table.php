@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bets', function (Blueprint $table) {
             $table->id();
+            $table->string('bet_id');
             $table->bigInteger('users_id');
             $table->double('round');
             $table->time('time_per_round');
