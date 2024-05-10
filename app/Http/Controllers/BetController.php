@@ -114,36 +114,4 @@ class BetController extends Controller
             return redirect()->back()->with(['error' => 'Failed to create bet', 'message' => $th->getMessage()]);
         }
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Bet $bet)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Bet $bet)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Bet $bet)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Bet $bet)
-    {
-        //
-    }
 }
